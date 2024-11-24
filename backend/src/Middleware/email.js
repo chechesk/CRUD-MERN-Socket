@@ -1,8 +1,8 @@
 const transporter = require('../Config/email'); // Importar el transporter
+const { MAIL_USER } = require('../Config/env');
 
 const Email = async (req, res) => {
-  const body = req.body;
-  const email = body.email;
+  const { email } = req.body;
 
   if (!email) {
     return res.status(400).send('No email provided');
@@ -11,7 +11,7 @@ const Email = async (req, res) => {
   try {
     // Configuración del correo
     const mailOptions = {
-      from: process.env.MAIL_USER, // Remitente
+      from: MAIL_USER, // Remitente
       to: email, // Destinatario
       subject: 'Test email', // Asunto
       text: 'This email is sent using Nodemailer.', // Mensaje
@@ -20,11 +20,11 @@ const Email = async (req, res) => {
     // Enviar el correo
     const info = await transporter.sendMail(mailOptions);
 
-    console.log('Email enviado:', info.response);
-    return res.send('Email sent successfully');
-  } catch (error) {
-    console.error('Error al enviar el email:', error);
-    return res.status(500).json({ error: error.message });
+    console.log('Email enviado:', info.response); // Para depuración
+    res.status(200).send('Email sent successfully');
+  } catch (err) {
+    console.error('Error al enviar el email:', err.message); // Log de errores
+    res.status(500).json({ error: 'Error sending email' });
   }
 };
 
