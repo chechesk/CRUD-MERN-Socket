@@ -10,7 +10,9 @@ const userSchema = new Schema({
   password: { type: String, required: true }, // Contraseña encriptada
   birthdate: { type: Date, required: true },
   creation_date: { type: Date, default: Date.now },
-});
+},
+
+{ timestamps: true });
 
 // Hook para encriptar la contraseña antes de guardar
 userSchema.pre('save', async function (next) {
