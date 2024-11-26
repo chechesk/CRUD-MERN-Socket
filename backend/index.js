@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const indexRouter = require('./src/Route/indexRouter')
 const bodyParser = require('body-parser')
+const { swaggerUi, swaggerSpec } = require('./src/Config/swagger')
 
 const server = express()
 
@@ -18,7 +19,7 @@ server.use(cors(
     }
       ));
 
+server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 server.use('/', indexRouter)
-
 
 module.exports = server;

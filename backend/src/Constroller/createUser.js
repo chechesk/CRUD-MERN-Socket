@@ -20,20 +20,21 @@ const createUser = async (req, res) => {
         }
 
         // Cifrar la contraseña
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // const hashedPassword = await bcrypt.hash(password, 10);
 
         // Generar el código de confirmación
         const confirmationCode = crypto.randomBytes(4).toString("hex");
-
+        console.log(confirmationCode);
+        
         // Crear un nuevo usuario
         const newUser = new userSchema({
             name,
             lastname,
             email,
-            password: hashedPassword,
+            password,
             birthdate,
             confirmationCode,
-            isVerified: false, // Nuevo usuario no verificado por defecto
+            isVerified: false, 
         });
 
         const savedUser = await newUser.save();

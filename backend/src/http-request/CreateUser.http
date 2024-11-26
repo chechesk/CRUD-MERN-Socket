@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/v1/users
+Content-Type: application/json
+
+{
+    "name": "Jose",
+    "lastname": "Romero",
+    "email": "test@gruporf.cl",
+    "password": "securepassword123",
+    "birthdate": "1992-07-15"
+}

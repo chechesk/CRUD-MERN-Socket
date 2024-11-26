@@ -1,13 +1,16 @@
 const { Router } = require('express');
 const Email = require('../Middleware/email');
-const userRouter = require('./userRouter')
+const userRouter = require('./userRouter');
+const { loginUser } = require('../Middleware/login');
 const route = Router()
 
-route.use('/users', userRouter)
+route.use('/api/v1/users', userRouter)
 
-route.get('/', (req, res) => {
-    res.send('Hello World!')
+route.get('/api/v1', (req, res) => {
+    res.send('Backend for MERN ')
   })
+
+route.post('/login', loginUser)
 
 route.post('/api/mail', Email)
 

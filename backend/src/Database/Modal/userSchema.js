@@ -7,7 +7,7 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // Contraseña encriptada
+  password: { type: String, required: true },
   birthdate: { type: Date, required: true },
   isVerified: { type: Boolean, default: false },
   confirmationCode: { type: String, default: null },
@@ -15,31 +15,19 @@ const userSchema = new Schema({
 },
 
 { timestamps: true });
-
-// Hook para encriptar la contraseña antes de guardar
+  
 userSchema.pre('save', async function (next) {
-  const user = this;
-
-  // Si la contraseña no ha sido modificada, salta este paso
-  if (!user.isModified('password')) return next();
-
-  try {
-    // Genera el salt y encripta la contraseña
-    const salt = await bcrypt.genSalt(10); // 10 es el factor de costo recomendado
-    user.password = await bcrypt.hash(user.password, salt);
-    next();
-  } catch (err) {
-    next(err);
-  }
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
-// Método para comparar contraseñas
-userSchema.methods.comparePassword = async function (candidatePassword) {
-  try {
-    return await bcrypt.compare(candidatePassword, this.password);
-  } catch (err) {
-    throw new Error(err);
-  }
-};
+  userSchema.methods.comparePassword = async function (password) {
+    try {
+      return await bcrypt.compare(password, this.password);
+    } catch (err) {
+      throw new Error(err);
+    }};
 
 module.exports = mongoose.model('Users', userSchema);

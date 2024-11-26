@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const server = require('./index');
 const { port } = require('./src/Config/env');
 const connectToDb = require('./src/Database/db');
@@ -13,7 +12,8 @@ const connectToDb = require('./src/Database/db');
     }
 
       server.listen(port, () => {
-      console.log(`Server listening on port ${port}`);
+      console.log(`Servidor corriendo en http://localhost:${port}`);
+      console.log(`Documentación en http://localhost:${port}/api-docs`);
     });
   } catch (err) {
     console.error('Error initializing application:', err);
