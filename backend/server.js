@@ -1,5 +1,5 @@
 const server = require('./index');
-const { port } = require('./src/Config/env');
+const { PORT } = require('./src/Config/env');
 const connectToDb = require('./src/Database/db');
 
 (async () => {
@@ -7,13 +7,13 @@ const connectToDb = require('./src/Database/db');
     await connectToDb();
     console.log('Database connection successful');
 
-       if (!port) {
-      throw new Error('PORT is not defined in the environment variables');
+       if (!PORT) {
+      throw new Error('port is not defined in the environment variables');
     }
 
-      server.listen(port, () => {
-      console.log(`Servidor corriendo en http://localhost:${port}`);
-      console.log(`Documentación en http://localhost:${port}/api-docs`);
+      server.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+      console.log(`Documentación en http://localhost:${PORT}/api-docs`);
     });
   } catch (err) {
     console.error('Error initializing application:', err);
