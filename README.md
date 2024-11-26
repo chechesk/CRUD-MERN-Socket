@@ -88,7 +88,7 @@ CRUD-MERN-Socket/
 ## Instalación
 
 ### 1. Clonar el Repositorio
-```bash
+
 git clone https://github.com/chechesk/CRUD-MERN-Socket.git
 cd CRUD-MERN-Socket
 
@@ -99,6 +99,8 @@ Crea un archivo .env en las carpetas backend y frontend siguiendo los ejemplos p
 Backend:
 cd backend
 npm install
+
+## Uso
 
 Frontend:
 cd frontend
@@ -116,15 +118,18 @@ cd frontend
 npm run dev
 La aplicación estará disponible en el puerto 5173.
 
+## documentación
+
 Documentación
 Las rutas del backend están documentadas con Swagger API. Una vez que el servidor esté corriendo, puedes acceder a la documentación en:
 http://localhost:3001/api-docs
 
-Pruebas Unitarias
+## Pruebas Unitarias
 Para ejecutar las pruebas en el backend, usa el siguiente comando:
 cd backend
 npm run test
 
+## docker
 Docker
 El proyecto incluye un archivo docker-compose.yml que configura los servicios de backend y frontend.
 
@@ -135,5 +140,6 @@ Puertos
 Backend: 3001
 Frontend: 5173
 
+## contribución
 Contribución
 Si deseas contribuir, por favor abre un issue o envía un pull request con tus mejoras o sugerencias.
