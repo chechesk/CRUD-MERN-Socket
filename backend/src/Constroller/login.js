@@ -36,4 +36,4 @@ const loginUser = async (req, res) => {
     next(error);
   }
 }
-module.exports = { loginUser }
+module.exports =  loginUser 

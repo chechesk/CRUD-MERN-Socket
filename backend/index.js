@@ -20,6 +20,6 @@ server.use(cors(
       ));
 
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-server.use('/', indexRouter)
+server.use('/api/v1/', indexRouter)
 
 module.exports = server;

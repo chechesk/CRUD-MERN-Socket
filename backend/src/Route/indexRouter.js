@@ -1,17 +1,19 @@
 const { Router } = require('express');
 const Email = require('../Middleware/email');
+const loginRouter = require('./loginRouter');
 const userRouter = require('./userRouter');
-const { loginUser } = require('../Middleware/login');
+const { Authenticate } = require('../Middleware/autenticate');
+
 const route = Router()
 
-route.use('/api/v1/users', userRouter)
+route.use('/users', Authenticate, userRouter)
 
-route.get('/api/v1', (req, res) => {
+route.use('/auth', loginRouter)
+
+route.get('/', (req, res) => {
     res.send('Backend for MERN ')
   })
 
-route.post('/login', loginUser)
 
-route.post('/api/mail', Email)
 
 module.exports = route;

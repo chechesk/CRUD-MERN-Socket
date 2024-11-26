@@ -1,4 +1,5 @@
 const userSchema = require('../Database/Modal/userSchema');
+const emailConfirmate = require('../Middleware/EmailConfirmate');
 
 const confirCode = async (req, res) => {
     const { email, code } = req.body;
@@ -23,7 +24,13 @@ const confirCode = async (req, res) => {
         user.isVerified = true;
         user.confirmationCode = null; // Limpiar el código de confirmación
         await user.save();
-
+        try {
+            // Enviar el correo de confirmación
+            await emailConfirmate(email);  // Llamada a Email con solo el correo
+          } catch (emailError) {
+            console.error("Error al enviar el correo:", emailError);
+            return res.status(500).json({ message: "Error al enviar el correo de confirmación." });
+          }
         res.status(200).json({ message: "Cuenta confirmada exitosamente." });
     } catch (error) {
         console.error("Error en la confirmación:", error);

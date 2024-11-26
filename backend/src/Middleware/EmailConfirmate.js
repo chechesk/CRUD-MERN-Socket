@@ -1,11 +1,9 @@
 const transporter = require('../Config/email'); // Importar el transporter
 const { MAIL_USER } = require('../Config/env');
 
-const Email = async (req, res) => {
-  const { email } = req.body;
-
+const emailConfirmate = async (email) => {  // Cambiar para recibir solo email
   if (!email) {
-    return res.status(400).send('No email provided');
+    throw new Error('No email provided'); // Lanzar error si no se proporciona email
   }
 
   try {
@@ -19,11 +17,11 @@ const Email = async (req, res) => {
 
     // Enviar el correo
     const info = await transporter.sendMail(mailOptions);
-    res.status(200).send('Email sent successfully', info);
+    console.log('Correo enviado:', info);  // Log de información de envío
   } catch (err) {
     console.error('Error al enviar el email:', err.message); // Log de errores
-    res.status(500).json({ error: 'Error sending email' });
+    throw new Error('Error sending email'); // Lanzar un error si falla el envío
   }
 };
 
-module.exports = Email;
+module.exports = emailConfirmate;

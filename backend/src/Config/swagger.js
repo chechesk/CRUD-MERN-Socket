@@ -23,9 +23,9 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: ['src/Route/userRouter.js'],
+  apis: ['src/Route/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
-console.log(JSON.stringify(swaggerSpec, null, 2));
+// console.log(JSON.stringify(swaggerSpec, null, 2));
 module.exports = { swaggerUi, swaggerSpec };
