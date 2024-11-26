@@ -9,6 +9,8 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }, // Contraseña encriptada
   birthdate: { type: Date, required: true },
+  isVerified: { type: Boolean, default: false },
+  confirmationCode: { type: String, default: null },
   creation_date: { type: Date, default: Date.now },
 },
 
